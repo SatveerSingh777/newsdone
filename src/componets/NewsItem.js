@@ -1,25 +1,24 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class NewsItems extends Component {
-  render() {
-    let { title, description, imageUrl, newsUrl, author, publishedAt,channelName } = this.props;
+const NewsItems = (props) => {
+
     return (
-      <div>
+      <div style={{marginTop:"50px"}}>
         <div className="card" >
-          <img src={imageUrl} className="card-img-top" alt={title} />
+          <img src={props.imageUrl} className="card-img-top" alt={props.title} />
           <div className="card-body">
-        <span className="badge text-bg-danger my-2">{channelName}</span>
-            <h5 className="card-title">{title}</h5>
-            <p className="card-text">{description}</p>
+        <span className="badge text-bg-danger my-2">{props.channelName}</span>
+            <h5 className="card-title">{props.title}</h5>
+            <p className="card-text">{props.description}</p>
             <br />
-            <footer className="blockquote-footer">By <cite title="Source Title">{!author ? "Unknown" : author}</cite></footer>
-            <a href={newsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">Read more</a>
+            <footer className="blockquote-footer">By <cite title="Source Title">{!props.author ? "Unknown" : props.author}</cite></footer>
+            <a href={props.newsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">Read more</a>
             <br />
-            <small className="text-body-secondary">Last updated {new Date(publishedAt).toLocaleString()}</small>
+            <small className="text-body-secondary">Last updated {new Date(props.publishedAt).toLocaleString()}</small>
           </div>
         </div>
       </div>
     )
-  }
 }
 
+export default NewsItems
