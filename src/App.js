@@ -1,10 +1,11 @@
 // import logo from './logo.svg';
 // import './App.css';
-import React,{useState} from 'react'
-import Navbar from './componets/Navbar'
-import News from './componets/News'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingBar from 'react-top-loading-bar'
+import React,{useState,lazy,Suspense} from 'react'
+import Navbar from './componets/Navbar'
+// import News from './componets/News'\
+const News = lazy(() =>import('./componets/News'))
 
 const App = () => {
 
@@ -22,6 +23,7 @@ const [progress, setProgress] = useState(0)
             color='#f11946'
             progress={progress}
           />
+          <Suspense fallback={<div className = "container text-center my-5">Loading...</div>}>
           <Routes>
             <Route exact path="/" element={<News setProgress = {setProgress} apiKey={apiKey} key={"business"} pageSize={17} country={"us"} category={"business"} />}></Route>
             <Route exact path="/entertainment" element={<News setProgress = {setProgress} apiKey={apiKey} key={"entertainment"} pageSize={17} country={"us"} category={"entertainment"} />}></Route>
@@ -31,6 +33,7 @@ const [progress, setProgress] = useState(0)
             <Route exact path="/sports" element={<News setProgress = {setProgress} apiKey={apiKey} key={"sports"} pageSize={17} country={"us"} category={"sports"} />}></Route>
             <Route exact path="/technology" element={<News setProgress = {setProgress} apiKey={apiKey} key={"technology"} pageSize={17} country={"us"} category={"technology"} />}></Route>
           </Routes>
+          </Suspense>
         </BrowserRouter>
       </>
     )
